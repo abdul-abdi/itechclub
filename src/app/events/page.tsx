@@ -1,0 +1,560 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Swoosh } from '@/components/ui/Swoosh';
+import { Modal } from '@/components/ui/Modal';
+import { useState } from 'react';
+import Link from 'next/link';
+
+const techChats = [
+  {
+    id: 1,
+    date: 'January 15',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Kickoff and iTech Activities Showcase',
+    description: 'Start the semester with an overview of all iTech activities and opportunities.',
+    detailedDescription: 'Join us for an exciting kickoff session where community leads will showcase their plans for the semester. Learn about upcoming events, workshops, and opportunities to grow your tech skills. This session will help you choose the right community that aligns with your interests.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['iTech Club President', 'Community Leads'],
+    format: 'Interactive presentation followed by Q&A and networking',
+    image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop',
+    icon: '🚀'
+  },
+  {
+    id: 2,
+    date: 'January 22',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Blockchain Technology Roundtable',
+    description: 'Deep dive into blockchain technology, cryptocurrencies, and decentralized applications.',
+    detailedDescription: 'Explore the fascinating world of blockchain technology with our Blockchain community lead. Discuss current trends in cryptocurrencies, smart contracts, and the future of decentralized applications. Perfect for both beginners and those already familiar with blockchain concepts.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['Blockchain Community Lead'],
+    format: 'Technical discussion and real-world use cases',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2070&auto=format&fit=crop',
+    icon: '⛓️'
+  },
+  {
+    id: 3,
+    date: 'January 29',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Networking and CyberSecurity Roundtable',
+    description: 'Explore network security, ethical hacking, and cybersecurity best practices.',
+    detailedDescription: 'Join our cybersecurity experts for an in-depth discussion on network security, ethical hacking, and the latest cybersecurity trends. Learn about career opportunities in cybersecurity and how to protect digital assets.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['Cybersecurity Community Lead'],
+    format: 'Interactive workshop with live demonstrations',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
+    icon: '🔒'
+  },
+  {
+    id: 4,
+    date: 'February 5',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Product/Project Management and Design Roundtable',
+    description: 'Learn about product lifecycle, project methodologies, and design thinking.',
+    detailedDescription: 'Discover the principles of product management and design thinking. Our community leads will share insights on project methodologies, user experience, and how to build successful products.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['Product Management Lead', 'Design Community Lead'],
+    format: 'Workshop with case studies and group activities',
+    image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=2072&auto=format&fit=crop',
+    icon: '📊'
+  },
+  {
+    id: 5,
+    date: 'February 12',
+    time: '4:30 PM - 7:00 PM',
+    title: 'AI/ML/Data Science Roundtable',
+    description: 'Special edition exploring artificial intelligence, machine learning, and data science.',
+    detailedDescription: 'A special session at Mangu Campus diving deep into AI, ML, and Data Science. Learn about the latest trends, tools, and how to start your journey in these exciting fields.',
+    location: 'Mangu Campus (Room TBD)',
+    type: 'Special Edition',
+    leads: ['AI/ML Community Lead', 'Data Science Lead'],
+    format: 'Technical presentations and hands-on exercises',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop',
+    icon: '🤖'
+  },
+  {
+    id: 6,
+    date: 'February 19',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Career Talk Roundtable',
+    description: 'Insights from recruiters and hiring managers on tech industry expectations.',
+    detailedDescription: 'Get valuable insights from industry professionals about what companies look for in tech talent. Learn about interview preparation, portfolio building, and career growth strategies.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['Industry Professionals', 'Career Development Team'],
+    format: 'Panel discussion and Q&A session',
+    image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2073&auto=format&fit=crop',
+    icon: '💼'
+  },
+  {
+    id: 7,
+    date: 'February 26',
+    time: '4:30 PM - 7:00 PM',
+    title: 'IoT Roundtable',
+    description: 'Discover the world of Internet of Things and connected devices.',
+    detailedDescription: 'Explore the exciting world of IoT with hands-on demonstrations of smart devices and sensors. Learn about IoT architecture, protocols, and real-world applications.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['IoT Community Lead'],
+    format: 'Demo-based workshop with practical exercises',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop',
+    icon: '🌐'
+  },
+  {
+    id: 8,
+    date: 'March 5',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Web Development Roundtable',
+    description: 'Special edition covering modern web development technologies and practices.',
+    detailedDescription: 'Join us at Nairobi Campus for a special session on modern web development. Learn about the latest frameworks, tools, and best practices in frontend and backend development.',
+    location: 'Nairobi Campus (Room TBD)',
+    type: 'Special Edition',
+    leads: ['Web Development Community Lead'],
+    format: 'Code-along session and architecture discussion',
+    image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=2074&auto=format&fit=crop',
+    icon: '🌍'
+  },
+  {
+    id: 9,
+    date: 'March 12',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Android Development Roundtable',
+    description: 'Deep dive into Android app development and mobile technologies.',
+    detailedDescription: 'Explore mobile app development with a focus on Android. Learn about Kotlin, app architecture, UI design, and publishing to the Play Store.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['Mobile Development Lead'],
+    format: 'Technical workshop with app development demo',
+    image: 'https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&w=2070&auto=format&fit=crop',
+    icon: '📱'
+  },
+  {
+    id: 10,
+    date: 'March 19',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Tech Support Roles Roundtable',
+    description: 'Explore Business Dev, HR, IT, QA, and other crucial tech support roles.',
+    detailedDescription: 'Discover the diverse range of roles that support tech teams. Learn about quality assurance, technical writing, business development, and how these roles contribute to successful tech projects.',
+    location: 'TRC Campus, Room L205',
+    type: 'Tech Chat',
+    leads: ['Tech Operations Lead', 'QA Lead'],
+    format: 'Panel discussion with role-specific breakout sessions',
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop',
+    icon: '🔧'
+  }
+].map(chat => ({
+  ...chat,
+  time: '4:30 PM - 7:00 PM'
+}));
+
+const specialEvents = [
+  {
+    id: 1,
+    date: 'January 25',
+    title: 'Karura Forest Excursion',
+    description: 'Network and unwind with a refreshing walk through Karura Forest.',
+    type: 'Excursion',
+    image: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    id: 2,
+    date: 'February 8-9',
+    title: 'February Hacker Night',
+    description: 'Overnight coding session from 6 PM to 9 AM. Build, learn, and collaborate.',
+    type: 'Hacker Night',
+    location: 'Mangu Campus',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    id: 3,
+    date: 'February 21',
+    title: 'Tech Football Match',
+    description: 'Network and have fun with a friendly tech community football match.',
+    type: 'Excursion',
+    image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    id: 4,
+    date: 'March 8-9',
+    title: 'March Hacker Night',
+    description: 'Overnight coding session from 6 PM to 9 AM. Build, learn, and collaborate.',
+    type: 'Hacker Night',
+    location: 'Mangu Campus',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    id: 5,
+    date: 'March 22',
+    title: 'Hiking Adventure',
+    description: 'End of semester hiking excursion (Location TBA)',
+    type: 'Excursion',
+    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop'
+  }
+];
+
+export default function Events() {
+  const [selectedEvent, setSelectedEvent] = useState<(typeof techChats[0] | typeof specialEvents[0] | null)>(null);
+
+  // Helper function to determine if event is a tech chat
+  const isTechChat = (event: typeof techChats[0] | typeof specialEvents[0]): event is typeof techChats[0] => {
+    return 'time' in event && 'leads' in event;
+  };
+
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white pt-32 pb-16 relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-blue-50/50 to-transparent" />
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/3 -right-48 w-96 h-96 bg-blue-200/40 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 right-0 w-full text-blue-50/30">
+          <Swoosh />
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-20"
+        >
+          <div className="inline-block p-2 px-4 rounded-full bg-blue-50 text-blue-600 font-medium text-sm mb-6">
+            🎯 Join our events
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            Upcoming Events
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Discover and participate in our upcoming tech events, workshops, and meetups. Connect with fellow tech enthusiasts and expand your knowledge.
+          </p>
+        </motion.div>
+
+        {/* Tech Chats Section */}
+        <section className="relative py-16 sm:py-24">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            >
+              iTech's Tech Chats
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-lg text-gray-600"
+            >
+              Join us every Wednesday for engaging roundtable discussions on various tech topics.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {techChats.map((chat, index) => (
+              <motion.div
+                key={chat.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => setSelectedEvent(chat)}
+                className="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer hover:-translate-y-1 hover:border-blue-500/50"
+              >
+                <div className="relative h-40 sm:h-44 lg:h-48">
+                  <Image
+                    src={chat.image}
+                    alt={chat.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent group-hover:via-black/40 transition-colors duration-300" />
+                  <div className="absolute top-4 left-4 flex items-center gap-2">
+                    <span className="text-3xl transform group-hover:scale-110 transition-transform duration-300">{chat.icon}</span>
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 bg-opacity-90 shadow-lg">
+                      {chat.type}
+                    </span>
+                  </div>
+                </div>
+                <div className="relative p-4 sm:p-6">
+                  <div className="absolute inset-0 bg-blue-50/0 group-hover:bg-blue-50/50 transition-colors duration-300" />
+                  <div className="relative">
+                    <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
+                      <span className="font-medium group-hover:text-blue-600 transition-colors">{chat.date}</span>
+                      <span className="group-hover:text-blue-600 transition-colors">{chat.time}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-3">
+                      {chat.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 line-clamp-2 mb-4 group-hover:text-gray-700 transition-colors">
+                      {chat.description}
+                    </p>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <svg className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <span className="group-hover:text-blue-600 transition-colors">{chat.location}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Decorative Swoosh between sections */}
+        <div className="relative py-16">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-full text-blue-100/40 transform scale-y-75">
+              <Swoosh />
+            </div>
+          </div>
+        </div>
+
+        {/* Special Events Section */}
+        <section className="relative py-16 sm:py-24 bg-gradient-to-b from-blue-50 via-white to-blue-50">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            >
+              Special Events
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-lg text-gray-600"
+            >
+              Exciting activities and events throughout the semester.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+            {specialEvents.map((event, index) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => setSelectedEvent(event)}
+                className="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer hover:-translate-y-1 hover:border-blue-500/50"
+              >
+                <div className="relative h-48 sm:h-52 lg:h-56">
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent group-hover:via-black/40 transition-colors duration-300" />
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-blue-600 text-white shadow-lg">
+                      {event.type}
+                    </span>
+                  </div>
+                </div>
+                <div className="relative p-4 sm:p-6">
+                  <div className="absolute inset-0 bg-blue-50/0 group-hover:bg-blue-50/50 transition-colors duration-300" />
+                  <div className="relative">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      {event.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-gray-600 mb-4">{event.description}</p>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <span className="font-medium group-hover:text-blue-600 transition-colors">{event.date}</span>
+                      {event.location && (
+                        <>
+                          <span className="mx-2">•</span>
+                          <span className="group-hover:text-blue-600 transition-colors">{event.location}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Enhanced Modal */}
+        <Modal
+          isOpen={!!selectedEvent}
+          onClose={() => setSelectedEvent(null)}
+        >
+          {selectedEvent && (
+            <div className="relative">
+              <div className="relative h-64 sm:h-72">
+                <Image
+                  src={selectedEvent.image}
+                  alt={selectedEvent.title}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      {isTechChat(selectedEvent) && (
+                        <span className="text-4xl">{selectedEvent.icon}</span>
+                      )}
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 bg-opacity-90">
+                        {selectedEvent.type}
+                      </span>
+                    </div>
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">
+                      {selectedEvent.date}
+                    </span>
+                  </div>
+                  <h3 className="text-3xl sm:text-4xl font-bold text-white mt-auto">
+                    {selectedEvent.title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                {isTechChat(selectedEvent) ? (
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3 text-gray-700">
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <div>
+                            <p className="text-sm font-medium text-gray-500">Time</p>
+                            <p className="font-medium">{selectedEvent.time}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 text-gray-700">
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <div>
+                            <p className="text-sm font-medium text-gray-500">Location</p>
+                            <p className="font-medium">{selectedEvent.location}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        {selectedEvent.leads && (
+                          <div className="flex items-center gap-3 text-gray-700">
+                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <div>
+                              <p className="text-sm font-medium text-gray-500">Session Leads</p>
+                              <p className="font-medium">{selectedEvent.leads.join(', ')}</p>
+                            </div>
+                          </div>
+                        )}
+                        {selectedEvent.format && (
+                          <div className="flex items-center gap-3 text-gray-700">
+                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            <div>
+                              <p className="text-sm font-medium text-gray-500">Session Format</p>
+                              <p className="font-medium">{selectedEvent.format}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h4 className="text-xl font-semibold text-gray-900">About this Event</h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        {selectedEvent.detailedDescription}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3 text-gray-700">
+                      {selectedEvent.location && (
+                        <div className="flex items-center gap-3">
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <div>
+                            <p className="text-sm font-medium text-gray-500">Location</p>
+                            <p className="font-medium">{selectedEvent.location}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-xl font-semibold text-gray-900">About this Event</h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        {selectedEvent.description}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <div className="pt-4 flex justify-end gap-4">
+                  <button
+                    onClick={() => setSelectedEvent(null)}
+                    className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    Close
+                  </button>
+                  <Link
+                    href="https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Join the Community
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+        </Modal>
+
+        {/* Join Community CTA */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center bg-gradient-to-r from-blue-50 via-white to-blue-50 rounded-2xl p-6 sm:p-12 border border-blue-100/50 mt-16"
+        >
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Stay Updated with Our Events</h2>
+          <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            Join our WhatsApp community to get instant updates about upcoming events, tech talks, and networking opportunities.
+            Be part of the conversation and never miss an event!
+          </p>
+          <Link
+            href="https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300 w-full sm:w-auto"
+          >
+            Join iTech Club Community
+            <svg className="ml-2 w-5 sm:w-6 h-5 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
+        </motion.section>
+      </div>
+    </main>
+  );
+} 
