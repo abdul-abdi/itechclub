@@ -298,12 +298,20 @@ export default function Events() {
                     <p className="text-sm text-gray-600 line-clamp-2 mb-4 group-hover:text-gray-700 transition-colors">
                       {chat.description}
                     </p>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <svg className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <span className="group-hover:text-blue-600 transition-colors">{chat.location}</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <svg className="w-4 h-4 mr-1.5 text-gray-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span className="group-hover:text-blue-600 transition-colors">{chat.location}</span>
+                      </div>
+                      <button
+                        onClick={() => setSelectedEvent(chat)}
+                        className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Learn More
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -375,14 +383,19 @@ export default function Events() {
                       {event.title}
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 mb-4">{event.description}</p>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span className="font-medium group-hover:text-blue-600 transition-colors">{event.date}</span>
-                      {event.location && (
-                        <>
-                          <span className="mx-2">•</span>
-                          <span className="group-hover:text-blue-600 transition-colors">{event.location}</span>
-                        </>
-                      )}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {event.date}
+                      </div>
+                      <button
+                        onClick={() => setSelectedEvent(event)}
+                        className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Learn More
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -397,132 +410,175 @@ export default function Events() {
           onClose={() => setSelectedEvent(null)}
         >
           {selectedEvent && (
-            <div className="relative">
-              <div className="relative h-64 sm:h-72">
+            <div className="relative overflow-hidden">
+              {/* Header Image Section */}
+              <div className="relative h-48 sm:h-56">
                 <Image
                   src={selectedEvent.image}
                   alt={selectedEvent.title}
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      {isTechChat(selectedEvent) && (
-                        <span className="text-4xl">{selectedEvent.icon}</span>
-                      )}
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 bg-opacity-90">
-                        {selectedEvent.type}
-                      </span>
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">
-                      {selectedEvent.date}
-                    </span>
-                  </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold text-white mt-auto">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-transparent" />
+                
+                {/* Event Type Badge */}
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  {isTechChat(selectedEvent) && (
+                    <span className="text-3xl">{selectedEvent.icon}</span>
+                  )}
+                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 shadow-lg backdrop-blur-sm bg-opacity-90">
+                    {selectedEvent.type}
+                  </span>
+                </div>
+
+                {/* Close Button */}
+                <button
+                  onClick={() => setSelectedEvent(null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-colors"
+                >
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+
+                {/* Title */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white">
                     {selectedEvent.title}
                   </h3>
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 space-y-8">
+              {/* Content Section */}
+              <div className="p-4 sm:p-6 space-y-6">
                 {isTechChat(selectedEvent) ? (
                   <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3 text-gray-700">
-                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {/* Key Details Grid */}
+                    <div className="grid grid-cols-2 gap-4 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          <div>
-                            <p className="text-sm font-medium text-gray-500">Time</p>
-                            <p className="font-medium">{selectedEvent.time}</p>
-                          </div>
                         </div>
-                        <div className="flex items-center gap-3 text-gray-700">
-                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          <div>
-                            <p className="text-sm font-medium text-gray-500">Location</p>
-                            <p className="font-medium">{selectedEvent.location}</p>
-                          </div>
+                        <div>
+                          <p className="text-xs text-gray-500 font-medium">When</p>
+                          <p className="text-sm font-semibold text-gray-900">{selectedEvent.date}, {selectedEvent.time}</p>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        {selectedEvent.leads && (
-                          <div className="flex items-center gap-3 text-gray-700">
-                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            <div>
-                              <p className="text-sm font-medium text-gray-500">Session Leads</p>
-                              <p className="font-medium">{selectedEvent.leads.join(', ')}</p>
-                            </div>
-                          </div>
-                        )}
-                        {selectedEvent.format && (
-                          <div className="flex items-center gap-3 text-gray-700">
-                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
-                            <div>
-                              <p className="text-sm font-medium text-gray-500">Session Format</p>
-                              <p className="font-medium">{selectedEvent.format}</p>
-                            </div>
-                          </div>
-                        )}
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500 font-medium">Where</p>
+                          <p className="text-sm font-semibold text-gray-900">{selectedEvent.location}</p>
+                        </div>
                       </div>
                     </div>
 
+                    {/* Session Details */}
                     <div className="space-y-4">
-                      <h4 className="text-xl font-semibold text-gray-900">About this Event</h4>
-                      <p className="text-gray-600 leading-relaxed">
-                        {selectedEvent.detailedDescription}
-                      </p>
+                      <div className="flex items-center gap-2 text-gray-900">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <h4 className="font-semibold">Session Format</h4>
+                      </div>
+                      <div className="pl-7">
+                        <p className="text-sm text-gray-600">{selectedEvent.format}</p>
+                      </div>
+                    </div>
+
+                    {/* Session Leads */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-2 text-gray-900">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <h4 className="font-semibold">Led By</h4>
+                      </div>
+                      <div className="pl-7">
+                        <p className="text-sm text-gray-600">{selectedEvent.leads.join(', ')}</p>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-gray-900">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h4 className="font-semibold">What to Expect</h4>
+                      </div>
+                      <div className="pl-7">
+                        <p className="text-sm text-gray-600 leading-relaxed line-clamp-4 sm:line-clamp-none">
+                          {selectedEvent.detailedDescription}
+                        </p>
+                      </div>
                     </div>
                   </>
                 ) : (
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3 text-gray-700">
+                  <>
+                    {/* Special Event Details */}
+                    <div className="grid grid-cols-1 gap-4 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500 font-medium">When</p>
+                          <p className="text-sm font-semibold text-gray-900">{selectedEvent.date}</p>
+                        </div>
+                      </div>
                       {selectedEvent.location && (
                         <div className="flex items-center gap-3">
-                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
+                          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            </svg>
+                          </div>
                           <div>
-                            <p className="text-sm font-medium text-gray-500">Location</p>
-                            <p className="font-medium">{selectedEvent.location}</p>
+                            <p className="text-xs text-gray-500 font-medium">Where</p>
+                            <p className="text-sm font-semibold text-gray-900">{selectedEvent.location}</p>
                           </div>
                         </div>
                       )}
                     </div>
-                    <div className="space-y-4">
-                      <h4 className="text-xl font-semibold text-gray-900">About this Event</h4>
-                      <p className="text-gray-600 leading-relaxed">
-                        {selectedEvent.description}
-                      </p>
+
+                    {/* Description */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-gray-900">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h4 className="font-semibold">About this Event</h4>
+                      </div>
+                      <div className="pl-7">
+                        <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 sm:line-clamp-none">
+                          {selectedEvent.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )}
 
-                <div className="pt-4 flex justify-end gap-4">
-                  <button
-                    onClick={() => setSelectedEvent(null)}
-                    className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                  >
-                    Close
-                  </button>
+                {/* Action Button */}
+                <div className="pt-4">
                   <Link
                     href="https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="flex items-center justify-center w-full px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors gap-2"
                   >
-                    Join the Community
+                    <span className="font-medium">Join the Community</span>
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
                   </Link>
                 </div>
               </div>

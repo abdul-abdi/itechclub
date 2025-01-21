@@ -1304,42 +1304,30 @@ export default function Resources() {
                             transition={{ duration: 0.5, delay: (sectionIndex + resourceIndex) * 0.1 }}
                             className="group relative"
                           >
-                            <button
-                              onClick={() => setSelectedResource(resource)}
-                              className="w-full text-left"
+                            <div 
+                              className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100"
                             >
-                              <div className="relative p-6 bg-white rounded-2xl border-2 border-blue-100/50 shadow-sm hover:shadow-md transition-all duration-300 group-hover:border-blue-300 overflow-hidden">
-                                {/* Decorative corner accent */}
-                                <div className="absolute top-0 right-0 w-16 h-16 -mr-8 -mt-8 bg-blue-50 rounded-full transform rotate-45 group-hover:bg-blue-100/50 transition-colors" />
-                                
-                                <div className="relative">
-                                  <div className="flex justify-between items-start">
-                                    <div>
-                                      <h4 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                                        {resource.name}
-                                      </h4>
-                                      <p className="text-gray-600 mt-1">{resource.description}</p>
-                                    </div>
-                                    <span className={cn(
-                                      'px-2 py-1 text-xs font-medium rounded-full shadow-sm',
-                                      resource.free ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
-                                    )}>
-                                      {resource.free ? 'Free' : 'Paid'}
+                              <div className="p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 mb-2">{resource.name}</h3>
+                                <p className="text-gray-600 mb-4">{resource.description}</p>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex flex-wrap gap-2">
+                                    <span className="px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full">
+                                      {resource.details?.difficulty}
+                                    </span>
+                                    <span className="px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full">
+                                      {resource.details?.format.join(', ')}
                                     </span>
                                   </div>
-                                  {resource.details && (
-                                    <div className="mt-4 flex flex-wrap gap-2">
-                                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-50 text-blue-600 shadow-sm">
-                                        {resource.details.difficulty}
-                                      </span>
-                                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-50 text-blue-600 shadow-sm">
-                                        {resource.details.timeCommitment}
-                                      </span>
-                                    </div>
-                                  )}
+                                  <button
+                                    onClick={() => setSelectedResource(resource)}
+                                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                                  >
+                                    View Details
+                                  </button>
                                 </div>
                               </div>
-                            </button>
+                            </div>
                           </motion.div>
                         ))}
                       </div>
