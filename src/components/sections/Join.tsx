@@ -88,10 +88,15 @@ export function Join() {
           className="text-center"
         >
           <Link
-            href="/join"
-            className="inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-200/20"
+            href="https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
           >
             Become a Member
+            <svg className="ml-2 w-5 sm:w-6 h-5 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </Link>
           <p className="mt-4 text-sm text-gray-500">
             Join us in building the future of technology!

@@ -320,7 +320,7 @@ export default function Communities() {
                   ))}
                 </div>
                 <Link
-                  href={communities[0].whatsappLink}
+                  href="https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors w-full sm:w-auto"
@@ -443,7 +443,7 @@ export default function Communities() {
                       ))}
                     </div>
                     <Link
-                      href={community.whatsappLink}
+                      href="https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors w-full sm:w-auto"
