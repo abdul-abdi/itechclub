@@ -19,7 +19,7 @@ const events = [
     title: 'iTech\'s Tech Chats',
     description: 'Engaging roundtable discussions on trending tech topics and industry insights.',
     date: 'Every Wednesday',
-    location: 'Room L205',
+    location: 'Room L204',
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop',
   },
   {
