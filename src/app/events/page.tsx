@@ -237,6 +237,13 @@ export default function Events() {
           </p>
         </motion.div>
 
+        {/* Decorative dots with line */}
+        <div className="flex items-center justify-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+          <div className="w-32 h-0.5 bg-blue-500"></div>
+          <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+        </div>
+
         {/* Tech Chats Section */}
         <section className="relative py-16 sm:py-24">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
