@@ -1,49 +1,38 @@
-import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { MainNav } from "@/components/layout/MainNav";
 import { Footer } from "@/components/layout/Footer";
 
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
-  variable: "--font-roboto",
-  display: "swap",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "iTech Club - Zetech University",
-  description:
-    "Join Zetech University's premier tech community. Explore AI/ML, Web Development, Cybersecurity, and more. Learn, innovate, and grow with us.",
-  keywords: [
-    "iTech Club",
-    "Zetech University",
-    "Technology",
-    "Programming",
-    "Coding",
-    "Community",
-  ],
-  authors: [{ name: "iTech Club" }],
-  creator: "iTech Club",
-  publisher: "Zetech University",
-  robots: "index, follow",
+  title: "iTech Club",
+  description: "iTech Club is a student-led technology club at the University of Minnesota that aims to foster a community of tech enthusiasts and provide opportunities for learning and growth.",
+  keywords: ["iTech Club", "University of Minnesota", "Technology", "Student Organization", "Tech Club", "Programming", "Software Development", "Tech Community"],
   openGraph: {
-    title: "iTech Club - Zetech University",
-    description:
-      "Join Zetech University's premier tech community. Explore AI/ML, Web Development, Cybersecurity, and more. Learn, innovate, and grow with us.",
-    url: "https://itech.zetech.ac.ke",
+    title: "iTech Club",
+    description: "iTech Club is a student-led technology club at the University of Minnesota that aims to foster a community of tech enthusiasts and provide opportunities for learning and growth.",
+    url: "https://itechclub.vercel.app",
     siteName: "iTech Club",
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "iTech Club - Zetech University",
-    description:
-      "Join Zetech University's premier tech community. Explore AI/ML, Web Development, Cybersecurity, and more. Learn, innovate, and grow with us.",
-    creator: "@iTechClub",
-    site: "@ZetechUni",
-  },
+  icons: {
+    icon: [
+      {
+        url: "/icons/favicon.ico",
+        sizes: "any"
+      }
+    ],
+    apple: [
+      {
+        url: "/icons/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png"
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
@@ -52,10 +41,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={roboto.variable}>
-      <body className="font-sans antialiased">
+    <html lang="en">
+      <body className={inter.className}>
         <MainNav />
-        {children}
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>

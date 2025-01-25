@@ -6,6 +6,7 @@ import { Swoosh } from '@/components/ui/Swoosh';
 import { Modal } from '@/components/ui/Modal';
 import { useState } from 'react';
 import Link from 'next/link';
+import { CalendarIcon, ClockIcon, MapPinIcon, UserGroupIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
 
 const techChats = [
   {
@@ -457,7 +458,7 @@ export default function Events() {
               </div>
 
               {/* Content Section */}
-              <div className="p-4 sm:p-6 space-y-6">
+              <div className="p-4 sm:p-6 space-y-6 overflow-y-auto">
                 {isTechChat(selectedEvent) ? (
                   <>
                     {/* Key Details Grid */}
