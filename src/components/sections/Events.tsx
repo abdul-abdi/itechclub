@@ -24,9 +24,9 @@ const events = [
   },
   {
     id: 3,
-    title: 'Hacker Nights',
-    description: 'Late-night coding sessions, problem-solving, and collaborative development.',
-    date: '8th - 9th February and 8th - 9th March',
+    title: 'Hack & Play: Open Playground Hack Night',
+    description: 'A one-of-a-kind overnight event designed to unleash your creativity, no matter your background or skill level.',
+    date: '7th - 8th February and 7th - 8th March',
     location: 'Mangu Campus',
     image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop',
   },

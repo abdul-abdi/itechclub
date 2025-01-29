@@ -7,6 +7,34 @@ import { Modal } from '@/components/ui/Modal';
 import { useState } from 'react';
 import Link from 'next/link';
 
+interface TechChat {
+  id: number;
+  date: string;
+  time: string;
+  title: string;
+  description: string;
+  detailedDescription?: string;
+  location: string;
+  type: string;
+  leads: string[];
+  format: string;
+  image: string;
+  icon: string;
+  showFullDescription?: boolean;
+}
+
+interface SpecialEvent {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  detailedDescription?: string;
+  type: string;
+  location?: string;
+  image: string;
+  showFullDescription?: boolean;
+}
+
 const techChats = [
   {
     id: 1,
@@ -164,9 +192,33 @@ const specialEvents = [
   },
   {
     id: 2,
-    date: 'February 8-9',
-    title: 'February Hacker Night',
-    description: 'Overnight coding session from 6 PM to 9 AM. Build, learn, and collaborate.',
+    date: 'February 7-8',
+    title: 'Hack & Play: Open Playground Hack Night',
+    description: 'A one-of-a-kind overnight event designed to unleash your creativity, no matter your background or skill level.',
+    detailedDescription: `Hack & Play: Zetech University's Open Playground Hack Night is a one-of-a-kind event designed to unleash your creativity, no matter your background or skill level. Whether you're an experienced coder, a curious tinkerer, or simply eager to try something new, this hack night is your blank canvas—bring any idea to life in a collaborative, high-energy environment.
+
+What's It All About?
+• No Limits: There are no predefined themes or constraints. You decide what to build—software, hardware, or something in between.
+• Playful Collaboration: Form a team on-site or bring your own. Share knowledge, learn from peers, and have fun along the way.
+• Guided Inspiration: While "Hack & Play" is all about exploration, we'll have optional mini-workshops and mentors available to spark ideas, offer feedback, and help you troubleshoot.
+• Show & Tell: At the end of the hack night, teams will have the chance to showcase their projects, demo new technologies, and celebrate each other's achievements.
+
+Who Can Join?
+Everyone! Students from all disciplines—Computer Science, Business, Arts, Engineering, Health Sciences, or beyond—are welcome. The more diverse the team, the more innovative the ideas!
+
+Why Participate?
+1. Experiment Freely: This is your opportunity to try out bold concepts or test that side project you've been dreaming of.
+2. Develop Skills: Gain hands-on experience with coding, design, hardware prototyping, project management, or pitching ideas.
+3. Network & Collaborate: Meet like-minded innovators, potential co-founders, or future collaborators.
+4. Have Fun: "Hack & Play" emphasizes the joy of creation. Even if your project doesn't "succeed," you'll learn a ton and have a blast doing it!
+
+Highlights
+• Idea Pitching: Kick off with quick pitches where anyone can share their idea and form teams spontaneously.
+• 24/7 Access to Creativity: Once the hacking begins, you and your team can dive straight into building.
+• Support & Resources: Mentors, fellow hackers, and optional tutorials will be on standby to help troubleshoot or provide direction.
+• Project Showcases & Celebrations: Wrap up by presenting your creations—functional, half-baked, or even humorous. Prizes may be awarded in fun categories that celebrate experimentation and creativity.
+
+Join us for Hack & Play and watch your wildest ideas take shape at Zetech University's ultimate open playground hack night. Whether you leave with a polished prototype or new friends and fresh inspiration, you'll remember the thrill of unbounded innovation!`,
     type: 'Hacker Night',
     location: 'Mangu Campus',
     image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop'
@@ -181,7 +233,7 @@ const specialEvents = [
   },
   {
     id: 4,
-    date: 'March 8-9',
+    date: 'March 7-8',
     title: 'March Hacker Night',
     description: 'Overnight coding session from 6 PM to 9 AM. Build, learn, and collaborate.',
     type: 'Hacker Night',
@@ -199,10 +251,10 @@ const specialEvents = [
 ];
 
 export default function Events() {
-  const [selectedEvent, setSelectedEvent] = useState<(typeof techChats[0] | typeof specialEvents[0] | null)>(null);
+  const [selectedEvent, setSelectedEvent] = useState<TechChat | SpecialEvent | null>(null);
 
   // Helper function to determine if event is a tech chat
-  const isTechChat = (event: typeof techChats[0] | typeof specialEvents[0]): event is typeof techChats[0] => {
+  const isTechChat = (event: TechChat | SpecialEvent): event is TechChat => {
     return 'time' in event && 'leads' in event;
   };
 
@@ -438,16 +490,6 @@ export default function Events() {
                   </span>
                 </div>
 
-                {/* Close Button */}
-                <button
-                  onClick={() => setSelectedEvent(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm transition-colors"
-                >
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-
                 {/* Title */}
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-2xl sm:text-3xl font-bold text-white">
@@ -457,125 +499,68 @@ export default function Events() {
               </div>
 
               {/* Content Section */}
-              <div className="p-4 sm:p-6 space-y-6">
-                {isTechChat(selectedEvent) ? (
-                  <>
-                    {/* Key Details Grid */}
-                    <div className="grid grid-cols-2 gap-4 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500 font-medium">When</p>
-                          <p className="text-sm font-semibold text-gray-900">{selectedEvent.date}, {selectedEvent.time}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500 font-medium">Where</p>
-                          <p className="text-sm font-semibold text-gray-900">{selectedEvent.location}</p>
-                        </div>
-                      </div>
+              <div className="p-6 space-y-6">
+                {/* Key Details Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-3 bg-blue-50 rounded-xl p-3">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
                     </div>
-
-                    {/* Session Details */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2 text-gray-900">
-                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
-                        <h4 className="font-semibold">Session Format</h4>
-                      </div>
-                      <div className="pl-7">
-                        <p className="text-sm text-gray-600">{selectedEvent.format}</p>
-                      </div>
-                    </div>
-
-                    {/* Session Leads */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2 text-gray-900">
-                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <h4 className="font-semibold">Led By</h4>
-                      </div>
-                      <div className="pl-7">
-                        <p className="text-sm text-gray-600">{selectedEvent.leads.join(', ')}</p>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2 text-gray-900">
-                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <h4 className="font-semibold">What to Expect</h4>
-                      </div>
-                      <div className="pl-7">
-                        <p className="text-sm text-gray-600 leading-relaxed line-clamp-4 sm:line-clamp-none">
-                          {selectedEvent.detailedDescription}
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {/* Special Event Details */}
-                    <div className="grid grid-cols-1 gap-4 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500 font-medium">When</p>
-                          <p className="text-sm font-semibold text-gray-900">{selectedEvent.date}</p>
-                        </div>
-                      </div>
-                      {selectedEvent.location && (
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            </svg>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-500 font-medium">Where</p>
-                            <p className="text-sm font-semibold text-gray-900">{selectedEvent.location}</p>
-                          </div>
-                        </div>
+                    <div>
+                      <p className="text-xs text-gray-500 font-medium">When</p>
+                      <p className="text-sm font-semibold text-gray-900">{selectedEvent.date}</p>
+                      {isTechChat(selectedEvent) && (
+                        <p className="text-xs text-gray-500">{selectedEvent.time}</p>
                       )}
                     </div>
-
-                    {/* Description */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2 text-gray-900">
+                  </div>
+                  {selectedEvent.location && (
+                    <div className="flex items-center gap-3 bg-blue-50 rounded-xl p-3">
+                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
                         <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         </svg>
-                        <h4 className="font-semibold">About this Event</h4>
                       </div>
-                      <div className="pl-7">
-                        <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 sm:line-clamp-none">
-                          {selectedEvent.description}
-                        </p>
+                      <div>
+                        <p className="text-xs text-gray-500 font-medium">Where</p>
+                        <p className="text-sm font-semibold text-gray-900">{selectedEvent.location}</p>
                       </div>
                     </div>
-                  </>
-                )}
+                  )}
+                </div>
+
+                {/* Description */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-gray-900">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h4 className="font-semibold">About this Event</h4>
+                  </div>
+                  <div className="pl-7">
+                    <div className="prose prose-sm max-w-none text-gray-600">
+                      {selectedEvent.detailedDescription ? (
+                        <div className="space-y-3">
+                          <p className="text-sm leading-relaxed">{selectedEvent.description}</p>
+                          <div className="max-h-[280px] overflow-y-auto pr-4 custom-scrollbar">
+                            <div className="whitespace-pre-line text-sm">
+                              {selectedEvent.detailedDescription}
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                          {selectedEvent.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
                 {/* Action Button */}
-                <div className="pt-4">
+                <div className="pt-2">
                   <Link
                     href="https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj"
                     target="_blank"

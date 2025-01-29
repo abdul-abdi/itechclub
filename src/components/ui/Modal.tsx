@@ -24,7 +24,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 sm:pt-32">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -34,16 +34,16 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ 
               type: "spring",
               damping: 30,
               stiffness: 300,
               duration: 0.3
             }}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl border border-gray-100 mx-4"
+            className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl border border-gray-100 mx-4 hover:shadow-blue-500/10 transition-all duration-300"
           >
             <motion.div
               initial={{ opacity: 0 }}

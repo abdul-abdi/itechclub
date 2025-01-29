@@ -26,6 +26,7 @@ export function MainNav() {
     ['Events', '/events'],
     ['Communities', '/communities'],
     ['Resources', '/resources'],
+    ['Blog', '/blog'],
     ['Contact', '/contact'],
   ];
 
