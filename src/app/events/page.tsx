@@ -95,7 +95,7 @@ const techChats = [
   {
     id: 5,
     date: 'February 12',
-    time: '4:30 PM - 7:00 PM',
+    time: '2:00 PM - 4:00 PM',
     title: 'AI/ML/Data Science Roundtable',
     description: 'Special edition exploring artificial intelligence, machine learning, and data science.',
     detailedDescription: 'A special session at Mangu Campus diving deep into AI, ML, and Data Science. Learn about the latest trends, tools, and how to start your journey in these exciting fields.',
@@ -225,10 +225,11 @@ Join us for Hack & Play and watch your wildest ideas take shape at Zetech Univer
   },
   {
     id: 3,
-    date: 'February 21',
+    date: 'February 22',
     title: 'Tech Football Match',
     description: 'Network and have fun with a friendly tech community football match.',
     type: 'Excursion',
+    location: 'Mangu Campus',
     image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=2070&auto=format&fit=crop'
   },
   {
@@ -243,7 +244,7 @@ Join us for Hack & Play and watch your wildest ideas take shape at Zetech Univer
   {
     id: 5,
     date: 'March 22',
-    title: 'Hiking Adventure',
+    title: 'We shall see 😂',
     description: 'End of semester hiking excursion (Location TBA)',
     type: 'Excursion',
     image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop'
