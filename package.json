@@ -16,8 +16,8 @@
     "gsap": "^3.12.7",
     "lucide-react": "^0.473.0",
     "next": "15.1.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.15.1",
     "react-quill": "^2.0.0",
     "tailwind-merge": "^2.6.0"
