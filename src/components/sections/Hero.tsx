@@ -158,8 +158,8 @@ export function Hero() {
             {/* Main Image */}
             <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Students collaborating on tech projects"
+                src="/images/hero-image.jpg"
+                alt="iTech Club Hero"
                 fill
                 className="object-cover object-center transform hover:scale-105 transition-transform duration-700"
                 priority
