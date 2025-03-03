@@ -235,8 +235,12 @@ Join us for Hack & Play and watch your wildest ideas take shape at Zetech Univer
   {
     id: 4,
     date: 'March 7-8',
-    title: 'March Hacker Night',
-    description: 'Overnight coding session from 6 PM to 9 AM. Build, learn, and collaborate.',
+    title: '🎉 Hack & Play: "Byte by Byte : A Beginner\’s Playground" ',
+    description: 'This event is designed to make innovation accessible to everyone, no matter your skill level. Whether you\'re a complete beginner, an experienced coder, or just curious, this hack night is about taking small steps to build big ideas! 🏗️🔥',
+    detailedDescription: `📢 ATTENTION HACKERS & CREATORS! 🚀🔥
+  💡 Hack & Play: “Byte by Byte : A Beginner\’s Playground” is BACK! 💡
+
+Following the massive success of our first hacker night, we're bringing you an even better, more beginner-friendly, and fun-packed second edition! Whether you're a total beginner, an aspiring innovator, or just someone looking to have fun and build something cool, this night is for YOU!`,
     type: 'Hacker Night',
     location: 'Mangu Campus',
     image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop'
