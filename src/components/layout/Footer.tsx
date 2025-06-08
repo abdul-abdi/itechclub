@@ -21,8 +21,8 @@ export function Footer() {
   ];
 
   const social = [
-    { name: 'X (Twitter)', href: 'https://twitter.com/abdullahiabdi00' },
-    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/abdullahi-abdi-49a482251/' },
+    { name: 'X (Twitter)', href: 'https://x.com/ItechclubZetech' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/groups/9238662/' },
     { name: 'WhatsApp', href: 'https://chat.whatsapp.com/Jd4j1TARbdoHJntDjImPOj' },
     { name: 'GitHub', href: 'https://github.com/0xAbdulKhalid' },
   ];

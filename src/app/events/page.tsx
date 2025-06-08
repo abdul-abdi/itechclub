@@ -38,12 +38,12 @@ interface SpecialEvent {
 const techChats = [
   {
     id: 1,
-    date: 'January 15',
+    date: 'June 4 ',
     time: '4:30 PM - 7:00 PM',
     title: 'Kickoff and iTech Activities Showcase',
     description: 'Start the semester with an overview of all iTech activities and opportunities.',
     detailedDescription: 'Join us for an exciting kickoff session where community leads will showcase their plans for the semester. Learn about upcoming events, workshops, and opportunities to grow your tech skills. This session will help you choose the right community that aligns with your interests.',
-    location: 'TRC Campus, Room L204',
+    location: 'Mang`u Campus, Room PG4',
     type: 'Tech Chat',
     leads: ['iTech Club President', 'Community Leads'],
     format: 'Interactive presentation followed by Q&A and networking',
@@ -52,68 +52,12 @@ const techChats = [
   },
   {
     id: 2,
-    date: 'January 22',
-    time: '4:30 PM - 7:00 PM',
-    title: 'Blockchain Technology Roundtable',
-    description: 'Deep dive into blockchain technology, cryptocurrencies, and decentralized applications.',
-    detailedDescription: 'Explore the fascinating world of blockchain technology with our Blockchain community lead. Discuss current trends in cryptocurrencies, smart contracts, and the future of decentralized applications. Perfect for both beginners and those already familiar with blockchain concepts.',
-    location: 'TRC Campus, Room L204',
-    type: 'Tech Chat',
-    leads: ['Blockchain Community Lead'],
-    format: 'Technical discussion and real-world use cases',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2070&auto=format&fit=crop',
-    icon: '⛓️'
-  },
-  {
-    id: 3,
-    date: 'January 29',
-    time: '4:30 PM - 7:00 PM',
-    title: 'Networking and CyberSecurity Roundtable',
-    description: 'Explore network security, ethical hacking, and cybersecurity best practices.',
-    detailedDescription: 'Join our cybersecurity experts for an in-depth discussion on network security, ethical hacking, and the latest cybersecurity trends. Learn about career opportunities in cybersecurity and how to protect digital assets.',
-    location: 'TRC Campus, Room L204',
-    type: 'Tech Chat',
-    leads: ['Cybersecurity Community Lead'],
-    format: 'Interactive workshop with live demonstrations',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
-    icon: '🔒'
-  },
-  {
-    id: 4,
-    date: 'February 5',
-    time: '4:30 PM - 7:00 PM',
-    title: 'Product/Project Management and Design Roundtable',
-    description: 'Learn about product lifecycle, project methodologies, and design thinking.',
-    detailedDescription: 'Discover the principles of product management and design thinking. Our community leads will share insights on project methodologies, user experience, and how to build successful products.',
-    location: 'TRC Campus, Room L204',
-    type: 'Tech Chat',
-    leads: ['Product Management Lead', 'Design Community Lead'],
-    format: 'Workshop with case studies and group activities',
-    image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=2072&auto=format&fit=crop',
-    icon: '📊'
-  },
-  {
-    id: 5,
-    date: 'February 12',
-    time: '2:00 PM - 4:00 PM',
-    title: 'AI/ML/Data Science Roundtable',
-    description: 'Special edition exploring artificial intelligence, machine learning, and data science.',
-    detailedDescription: 'A special session at Mangu Campus diving deep into AI, ML, and Data Science. Learn about the latest trends, tools, and how to start your journey in these exciting fields.',
-    location: 'Mangu Campus (Room TBD)',
-    type: 'Special Edition',
-    leads: ['AI/ML Community Lead', 'Data Science Lead'],
-    format: 'Technical presentations and hands-on exercises',
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop',
-    icon: '🤖'
-  },
-  {
-    id: 6,
-    date: 'February 19',
+    date: 'June 11',
     time: '4:30 PM - 7:00 PM',
     title: 'Career Talk Roundtable',
     description: 'Insights from recruiters and hiring managers on tech industry expectations.',
     detailedDescription: 'Get valuable insights from industry professionals about what companies look for in tech talent. Learn about interview preparation, portfolio building, and career growth strategies.',
-    location: 'TRC Campus, Room L204',
+    location: 'Nairobi Campus, Room TBD',
     type: 'Tech Chat',
     leads: ['Industry Professionals', 'Career Development Team'],
     format: 'Panel discussion and Q&A session',
@@ -121,22 +65,8 @@ const techChats = [
     icon: '💼'
   },
   {
-    id: 7,
-    date: 'February 26',
-    time: '4:30 PM - 7:00 PM',
-    title: 'IoT Roundtable',
-    description: 'Discover the world of Internet of Things and connected devices.',
-    detailedDescription: 'Explore the exciting world of IoT with hands-on demonstrations of smart devices and sensors. Learn about IoT architecture, protocols, and real-world applications.',
-    location: 'TRC Campus, Room L204',
-    type: 'Tech Chat',
-    leads: ['IoT Community Lead'],
-    format: 'Demo-based workshop with practical exercises',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop',
-    icon: '🌐'
-  },
-  {
-    id: 8,
-    date: 'March 5',
+    id: 3,
+    date: 'June 18',
     time: '4:30 PM - 7:00 PM',
     title: 'Web Development Roundtable',
     description: 'Special edition covering modern web development technologies and practices.',
@@ -149,13 +79,83 @@ const techChats = [
     icon: '🌍'
   },
   {
+    id: 4,
+    date: 'June 25',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Blockchain Technology Roundtable',
+    description: 'Deep dive into blockchain technology, cryptocurrencies, and decentralized applications.',
+    detailedDescription: 'Explore the fascinating world of blockchain technology with our Blockchain community lead. Discuss current trends in cryptocurrencies, smart contracts, and the future of decentralized applications. Perfect for both beginners and those already familiar with blockchain concepts.',
+    location: 'TRC Campus, Room L204',
+    type: 'Tech Chat',
+    leads: ['Blockchain Community Lead'],
+    format: 'Technical discussion and real-world use cases',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2070&auto=format&fit=crop',
+    icon: '⛓️'
+  },
+  {
+    id: 5,
+    date: 'July 2',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Networking and CyberSecurity Roundtable',
+    description: 'Explore network security, ethical hacking, and cybersecurity best practices.',
+    detailedDescription: 'Join our cybersecurity experts for an in-depth discussion on network security, ethical hacking, and the latest cybersecurity trends. Learn about career opportunities in cybersecurity and how to protect digital assets.',
+    location: 'TRC Campus, Room L204',
+    type: 'Tech Chat',
+    leads: ['Cybersecurity Community Lead'],
+    format: 'Interactive workshop with live demonstrations',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
+    icon: '🔒'
+  },
+  {
+    id: 6,
+    date: 'July 9',
+    time: '4:30 PM - 7:00 PM',
+    title: 'Product/Project Management and Design Roundtable',
+    description: 'Learn about product lifecycle, project methodologies, and design thinking.',
+    detailedDescription: 'Discover the principles of product management and design thinking. Our community leads will share insights on project methodologies, user experience, and how to build successful products.',
+    location: 'TRC Campus, Room L204',
+    type: 'Tech Chat',
+    leads: ['Product Management Lead', 'Design Community Lead'],
+    format: 'Workshop with case studies and group activities',
+    image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=2072&auto=format&fit=crop',
+    icon: '📊'
+  },
+  {
+    id: 7,
+    date: 'July 16',
+    time: '2:00 PM - 4:00 PM',
+    title: 'AI/ML/Data Science Roundtable',
+    description: 'Special edition exploring artificial intelligence, machine learning, and data science.',
+    detailedDescription: 'A special session at Mangu Campus diving deep into AI, ML, and Data Science. Learn about the latest trends, tools, and how to start your journey in these exciting fields.',
+    location: 'Mang`u Campus (Room PG4)',
+    type: 'Special Edition',
+    leads: ['AI/ML Community Lead', 'Data Science Lead'],
+    format: 'Technical presentations and hands-on exercises',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop',
+    icon: '🤖'
+  },
+  {
+    id: 8,
+    date: 'July 23',
+    time: '4:30 PM - 7:00 PM',
+    title: 'IoT Roundtable',
+    description: 'Discover the world of Internet of Things and connected devices.',
+    detailedDescription: 'Explore the exciting world of IoT with hands-on demonstrations of smart devices and sensors. Learn about IoT architecture, protocols, and real-world applications.',
+    location: 'TRC Campus, Room L204',
+    type: 'Tech Chat',
+    leads: ['IoT Community Lead'],
+    format: 'Demo-based workshop with practical exercises',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop',
+    icon: '🌐'
+  },
+  {
     id: 9,
-    date: 'March 12',
+    date: 'July 30',
     time: '4:30 PM - 7:00 PM',
     title: 'Android Development Roundtable',
     description: 'Deep dive into Android app development and mobile technologies.',
     detailedDescription: 'Explore mobile app development with a focus on Android. Learn about Kotlin, app architecture, UI design, and publishing to the Play Store.',
-    location: 'TRC Campus, Room L204',
+    location: 'Mang`u Campus, Room PG4',
     type: 'Tech Chat',
     leads: ['Mobile Development Lead'],
     format: 'Technical workshop with app development demo',
@@ -164,12 +164,12 @@ const techChats = [
   },
   {
     id: 10,
-    date: 'March 19',
+    date: 'August 6',
     time: '4:30 PM - 7:00 PM',
     title: 'Tech Support Roles Roundtable',
     description: 'Explore Business Dev, HR, IT, QA, and other crucial tech support roles.',
     detailedDescription: 'Discover the diverse range of roles that support tech teams. Learn about quality assurance, technical writing, business development, and how these roles contribute to successful tech projects.',
-    location: 'TRC Campus, Room L204',
+    location: 'Mang`u Campus, Room PG4',
     type: 'Tech Chat',
     leads: ['Tech Operations Lead', 'QA Lead'],
     format: 'Panel discussion with role-specific breakout sessions',
@@ -184,15 +184,7 @@ const techChats = [
 const specialEvents = [
   {
     id: 1,
-    date: 'January 25',
-    title: 'Karura Forest Excursion',
-    description: 'Network and unwind with a refreshing walk through Karura Forest.',
-    type: 'Excursion',
-    image: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2070&auto=format&fit=crop'
-  },
-  {
-    id: 2,
-    date: 'February 7-8',
+    date: 'June 27-28',
     title: 'Hack & Play: Open Playground Hack Night',
     description: 'A one-of-a-kind overnight event designed to unleash your creativity, no matter your background or skill level.',
     detailedDescription: `Hack & Play: Zetech University's Open Playground Hack Night is a one-of-a-kind event designed to unleash your creativity, no matter your background or skill level. Whether you're an experienced coder, a curious tinkerer, or simply eager to try something new, this hack night is your blank canvas—bring any idea to life in a collaborative, high-energy environment.
@@ -224,8 +216,8 @@ Join us for Hack & Play and watch your wildest ideas take shape at Zetech Univer
     image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop'
   },
   {
-    id: 3,
-    date: 'February 22',
+    id: 2,
+    date: 'July 5',
     title: 'Tech Football Match',
     description: 'Network and have fun with a friendly tech community football match.',
     type: 'Excursion',
@@ -233,8 +225,16 @@ Join us for Hack & Play and watch your wildest ideas take shape at Zetech Univer
     image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=2070&auto=format&fit=crop'
   },
   {
+    id: 3,
+    date: 'July 19',
+    title: 'Karura Forest Excursion',
+    description: 'Network and unwind with a refreshing walk through Karura Forest.',
+    type: 'Excursion',
+    image: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
     id: 4,
-    date: 'March 7-8',
+    date: 'July 25-26',
     title: '🎉 Hack & Play: "Byte by Byte : A Beginner\’s Playground" ',
     description: 'This event is designed to make innovation accessible to everyone, no matter your skill level. Whether you\'re a complete beginner, an experienced coder, or just curious, this hack night is about taking small steps to build big ideas! 🏗️🔥',
     detailedDescription: `📢 ATTENTION HACKERS & CREATORS! 🚀🔥
@@ -247,11 +247,11 @@ Following the massive success of our first hacker night, we're bringing you an e
   },
   {
     id: 5,
-    date: 'March 22',
-    title: 'We shall see 😂',
-    description: 'End of semester hiking excursion (Location TBA)',
-    type: 'Excursion',
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop'
+    date: 'August 2',
+    title: 'Konza City Industrial Visit',
+    description: 'Explore the Silicon Savannah (Konza)',
+    type: 'Industrial Visit',
+    image: 'https://images.unsplash.com/photo-1593419522318-81b7c346a3e8?q=80&w=2027&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   }
 ];
 
